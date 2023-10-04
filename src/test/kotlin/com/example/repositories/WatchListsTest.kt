@@ -53,6 +53,7 @@ class WatchListsTest {
         else assertFalse(false)
     }
 
+
     @Test
     fun updateWatchListTest() = testApplication {
         val result = WatchLists.updateWatchList(id,symbol)

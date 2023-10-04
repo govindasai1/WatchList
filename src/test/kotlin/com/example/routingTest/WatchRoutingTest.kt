@@ -14,15 +14,6 @@ import kotlin.test.*
 
 class WatchRoutingTest {
     @Test
-    fun testWatchList() = testApplication {
-        application {
-            module(configureRouting())
-        }
-        val responce = client.get("/watchlist"){}
-        assertEquals(HttpStatusCode.OK,responce.status)
-    }
-
-    @Test
     fun testInsert() = testApplication {
         application {
             module(configureRouting())
@@ -43,23 +34,6 @@ class WatchRoutingTest {
     }
 
     @Test
-    fun testDeleteWatch() = testApplication {
-        application {
-            module(configureRouting())
-        }
-        val client = createClient {
-            install(ContentNegotiation){
-                json()
-            }
-        }
-        val responce = client.delete("/watchlist"){
-            setBody(Id(1))
-            contentType(ContentType.Application.Json)
-        }
-        assertEquals(HttpStatusCode.OK,responce.status)
-    }
-
-    @Test
     fun testUpdation() = testApplication {
         application { module(configureRouting()) }
         val client = createClient {
@@ -74,6 +48,41 @@ class WatchRoutingTest {
             contentType(ContentType.Application.Json)
         }
         assertEquals(HttpStatusCode.OK,response.status)
+    }
+
+    @Test
+    fun testWatchList() = testApplication {
+        application {
+            module(configureRouting())
+        }
+        val responce = client.get("/watchlist"){}
+        assertEquals(HttpStatusCode.OK,responce.status)
+    }
+
+    @Test
+    fun testWatchLists() = testApplication {
+        application {
+            module(configureRouting())
+        }
+        val responce = client.get("/watchlist/all"){}
+        assertEquals(HttpStatusCode.OK,responce.status)
+    }
+
+    @Test
+    fun testDeleteWatch() = testApplication {
+        application {
+            module(configureRouting())
+        }
+        val client = createClient {
+            install(ContentNegotiation){
+                json()
+            }
+        }
+        val responce = client.delete("/watchlist"){
+            setBody(Id(1))
+            contentType(ContentType.Application.Json)
+        }
+        assertEquals(HttpStatusCode.OK,responce.status)
     }
 
 }

@@ -21,7 +21,7 @@ fun Route.watchRoutes(){
 
         get ("/all"){
             val c = WatchLists.viewRecentWatchList()
-            call.respond(status = HttpStatusCode.Found,c)
+            call.respond(c)
         }
 
         get {
