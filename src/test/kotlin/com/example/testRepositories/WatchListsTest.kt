@@ -1,9 +1,10 @@
-package com.example.repositories
+package com.example.testRepositories
 
-import com.example.database.TestDatabaseFactory
+import com.example.testDatabase.TestDatabaseFactory
 import com.example.models.Message
 import com.example.models.Symbol
 import com.example.models.Watch
+import com.example.repositories.WatchLists
 import com.example.tables.RecentWatchList
 import com.example.tables.WatchList
 import io.ktor.server.testing.*
@@ -56,7 +57,7 @@ class WatchListsTest {
 
     @Test
     fun updateWatchListTest() = testApplication {
-        val result = WatchLists.updateWatchList(id,symbol)
+        val result = WatchLists.updateWatchList(id, symbol)
         if (result.equals(Message)) assertTrue(true)
         else assertFalse(false)
     }

@@ -1,4 +1,4 @@
-package com.example.database
+package com.example.testDatabase
 
 import org.jetbrains.exposed.sql.Database
 

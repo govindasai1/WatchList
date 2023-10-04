@@ -4,7 +4,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Symbol(
-    val asset:String,
+    val asset: String,
     val strike:Double,
     val lotSize:Int,
     val tickSize:Double,
@@ -32,3 +32,4 @@ data class Id(val id:Int)
 
 @Serializable
 data class Watch(val id:Int,val is_delete:String,val created_at:String,val updated_at:String,val symbol:String)
+

@@ -30,7 +30,6 @@ object WatchLists: WatchListDao {
 
     override suspend fun deleteWatchList(id: Int): Message {
         return if (checkingPresence(id)) {
-
             DatabaseFactory.dbQuery {
                 WatchList.deleteWhere { WatchList.id.eq(id) }
             }

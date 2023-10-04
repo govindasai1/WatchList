@@ -1,7 +1,7 @@
 package com.example
 
-import com.example.repositories.WatchListsTest
-import com.example.routingTest.WatchRoutingTest
+import com.example.testRepositories.WatchListsTest
+import com.example.testRouting.WatchRoutingTest
 import org.junit.runner.RunWith
 import org.junit.runners.Suite
 
