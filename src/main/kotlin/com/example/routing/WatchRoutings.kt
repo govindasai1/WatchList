@@ -15,12 +15,8 @@ fun Route.watchRoutes(){
     route(BASE_PATH){
 
         post {
-            try {
                 val responce = call.receive<Symbol>()
                 call.respond(status = HttpStatusCode.Created, WatchLists.createWatchList(responce))
-            }catch (_:Exception){
-                call.respond(Message("ENTER SYMBOL CORRECTLY"))
-            }
         }
 
         get (RESOURCE){
@@ -33,24 +29,14 @@ fun Route.watchRoutes(){
             call.respond(c[0])
         }
 
-
         put {
-            try {
                 val responce = call.receive<IdSymbol>()
                 call.respond(WatchLists.updateWatchList(responce.id, responce.symbol))
-            }catch (_:Exception){
-                call.respond(Message("ENTER SYMBOL CORRECTLY"))
-            }
         }
 
         delete {
-            try {
                 val id = call.receive<Id>()
                 call.respond(WatchLists.deleteWatchList(id.id))
-            }catch (e:Exception){
-                call.respond(Message("ENTER ID NOT WORDS"))
-
-            }
         }
     }
 }
