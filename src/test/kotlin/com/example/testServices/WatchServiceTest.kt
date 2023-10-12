@@ -1,11 +1,12 @@
-package com.example.testRepositories
+package com.example.testServices
 
-import com.example.testDatabase.TestDatabaseFactory
 import com.example.models.Message
 import com.example.models.Watch
 import com.example.repositories.WatchLists
+import com.example.services.WatchListServices
 import com.example.tables.RecentWatchList
 import com.example.tables.WatchList
+import com.example.testDatabase.TestDatabaseFactory
 import com.example.testParameters.id
 import com.example.testParameters.symbol
 import io.ktor.server.testing.*
@@ -16,15 +17,14 @@ import org.jetbrains.exposed.sql.transactions.transaction
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
-import org.junit.jupiter.api.MethodOrderer
 import org.junit.jupiter.api.Order
-import org.junit.jupiter.api.TestMethodOrder
 import java.sql.Connection
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
-@TestMethodOrder(MethodOrderer.OrderAnnotation::class)
-class WatchListsTest {
+
+class WatchServiceTest {
     private lateinit var database: Database
+    private val watchListServ = WatchListServices(WatchLists)
 
     @Before
     fun start(){
@@ -41,12 +41,10 @@ class WatchListsTest {
         }
     }
 
-
-
     @Test
     @Order(3)
     fun viewRecentTest() = testApplication {
-        val result = WatchLists.viewRecentWatchList()
+        val result = watchListServ.allWatchList()
         if (result.equals(Watch)) assertTrue(true)
         else assertFalse(false)
     }
@@ -54,7 +52,7 @@ class WatchListsTest {
     @Test
     @Order(1)
     fun createWatchListTest() = testApplication {
-        val result = WatchLists.createWatchList(symbol)
+        val result = watchListServ.watchListCreation(symbol)
         if (result.equals(Message)) assertTrue(true)
         else assertFalse(false)
     }
@@ -63,7 +61,7 @@ class WatchListsTest {
     @Test
     @Order(2)
     fun updateWatchListTest() = testApplication {
-        val result = WatchLists.updateWatchList(id, symbol)
+        val result = watchListServ.watchListUpdation(id, symbol)
         if (result.equals(Message)) assertTrue(true)
         else assertFalse(false)
     }
@@ -71,8 +69,9 @@ class WatchListsTest {
     @Test
     @Order(4)
     fun deleteWatchListTest() = testApplication {
-        val result = WatchLists.deleteWatchList(id)
+        val result = watchListServ.watchListDeletion(id)
         if (result.equals(Message)) assertTrue(true)
         else assertFalse(false)
     }
+
 }

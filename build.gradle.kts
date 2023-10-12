@@ -52,4 +52,7 @@ dependencies {
     testImplementation("org.testng:testng:7.1.0")
     testImplementation("io.mockk:mockk:1.13.3")
     implementation("io.insert-koin:koin-ktor:$koin_version")
+    // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.0")
+
 }
